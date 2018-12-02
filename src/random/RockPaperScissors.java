@@ -3,9 +3,12 @@
 
 package random;
 
+
+
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -29,6 +32,10 @@ public class RockPaperScissors extends JPanel implements ActionListener{
 	private Icon scissorsImage;
 
 	private Dimension buttonDim = new Dimension(300, 200);
+    
+	int playerScore = 0;
+    
+    int programScore = 0;
     
     public void run(){
 
@@ -75,12 +82,12 @@ public class RockPaperScissors extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         
         //1. Run the program and play many rounds of Rock Paper Scissors. Does the computer always choose the same thing?
-
+    		///yes
         //2. Change the value of opponentSelection to be a random number between 0 and 2;
 	//   Don't forget to create a Random object.
-	    
-        //2. Change the value of opponentSelection to be a random number between 0 and 2; 
-        int opponentSelection = 0;
+	    Random randomOne = new Random();
+	    int opponentSelection = randomOne.nextInt(2);
+	    		//2. Change the value of opponentSelection to be a random number between 0 and 2; 
         
         //3. Run the program again. Is the result different?
  
@@ -95,14 +102,19 @@ public class RockPaperScissors extends JPanel implements ActionListener{
         JOptionPane.showMessageDialog(null, "You chose: " + convertSelection(selection) + ".\n"
                     + "The computer chose: " + convertSelection(opponentSelection) + ".\n");
         
+        
         if(selection == opponentSelection){
             JOptionPane.showMessageDialog(null, "No Winner.  Play again.");
         }else if((selection == 0 && opponentSelection == 2) || 
                  (selection == 1 && opponentSelection == 0) ||
                  (selection == 2 && opponentSelection == 1)){
             JOptionPane.showMessageDialog(null, "You Win!");
+            playerScore++;
+            JOptionPane.showMessageDialog(null, "you "+playerScore+"-"+programScore+" computer");
         }else{
             JOptionPane.showMessageDialog(null, "You Lose!");
+            programScore++;
+            JOptionPane.showMessageDialog(null, "you "+playerScore+"-"+programScore+" computer");
         }
     }
     
